@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MEMoPAD Clinician Portal</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Oxygen (for headings) and Inter (for UI text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Configuration for Tailwind CSS -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'oxygen': ['Oxygen', 'sans-serif'],
+              'inter': ['Inter', 'sans-serif'],
+            },
+            colors: {
+              // Our defined Design System colors
+              'eggshell': '#F0EBD8',     // Primary Background
+              'powder-blue': '#A4B0F5',   // Accent Color
+              'delft-blue': '#414066',    // Primary Text & Action Color
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-eggshell font-inter text-delft-blue">
+
+    <div class="flex h-screen bg-eggshell">
+        <!-- Static Sidebar -->
+        <aside class="w-64 flex-shrink-0 bg-white flex flex-col shadow-lg">
+            <div class="h-20 flex items-center justify-center border-b border-gray-200">
+                <h1 class="font-oxygen text-2xl font-bold text-delft-blue">MEMoPAD</h1>
+            </div>
+            <nav class="flex-1 px-4 py-6 space-y-2">
+                <a href="#" class="flex items-center px-4 py-2 text-delft-blue bg-powder-blue bg-opacity-20 rounded-lg font-bold">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    Dashboard
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Global Calendar
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Settings
+                </a>
+            </nav>
+            <div class="p-4 border-t border-gray-200">
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H3"></path></svg>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-8 overflow-y-auto">
+            <!-- This is the Patient List view, which would be visible by default -->
+            <div id="patient-list-view">
+                <button id="back-to-dashboard" class="mb-4 text-sm font-medium text-powder-blue hover:text-delft-blue">&larr; Back to Dashboard</button>
+                <h2 class="font-oxygen text-3xl font-bold mb-6">Patient Dashboard</h2>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50 border-b border-gray-200">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-delft-blue uppercase tracking-wider">Patient Name / ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-delft-blue uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-delft-blue uppercase tracking-wider">Next Appointment</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <!-- Example Patient Row -->
+                            <tr class="hover:bg-gray-50 cursor-pointer transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">Jane Doe</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">New Journal Entry</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">July 10, 2025</td>
+                            </tr>
+                            <!-- More patient rows would go here -->
+                             <tr class="hover:bg-gray-50 cursor-pointer transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">John Smith</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Appointment Soon</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">July 12, 2025</td>
+                            </tr>
+                             <tr class="hover:bg-gray-50 cursor-pointer transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">Emily White</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">No new data</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">August 1, 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- This is the Patient Detail View, hidden by default. JS will show this when a patient is clicked. -->
+            <div id="patient-detail-view" class="hidden">
+                <h2 class="font-oxygen text-3xl font-bold mb-6">Patient: Jane Doe</h2>
+                
+                <!-- Tab Navigation -->
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                        <a href="#" class="border-powder-blue text-delft-blue whitespace-nowrap py-4 px-1 border-b-2 font-bold text-sm">Data & Insights</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Appointments</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Communication</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Clinician's Notes</a>
+                    </nav>
+                </div>
+
+                <!-- Tab Content Placeholder -->
+                <div class="mt-6">
+                    <!-- Content for "Data & Insights" will go here -->
+                    <div id="data-insights-content">
+                        <p class="text-gray-600">Placeholder for interactive calendar, charts, and journal feed, using the Master-Detail with Breadcrumbs pattern.</p>
+                    </div>
+                    <!-- Content for other tabs will be hidden by default -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

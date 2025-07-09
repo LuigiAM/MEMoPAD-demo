@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMoPAD - Clinician Portal</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Oxygen (for headings) and Inter (for UI text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Configuration for Tailwind CSS -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'oxygen': ['Oxygen', 'sans-serif'],
+              'inter': ['Inter', 'sans-serif'],
+            },
+            colors: {
+              // Our defined Design System colors
+              'eggshell': '#F0EBD8',     // Primary Background
+              'powder-blue': '#A4B0F5',   // Accent Color
+              'delft-blue': '#414066',    // Primary Text & Action Color
+            }
+          }
+        }
+      }
+    </script>
+
+</head>
+<body class="bg-eggshell font-inter text-delft-blue">
+
+    <div class="flex items-center justify-center min-h-screen p-4">
+        
+        <!-- Login Card -->
+        <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-lg">
+            
+            <!-- Header Section -->
+            <div class="text-center">
+                <h1 class="font-oxygen text-4xl font-bold text-delft-blue">MEMoPAD</h1>
+                <h2 class="mt-2 font-oxygen text-xl text-gray-600">Clinician Portal</h2>
+            </div>
+
+            <!-- Login Form -->
+            <form class="mt-8 space-y-6" action="#" method="POST">
+                <div class="space-y-4 rounded-md">
+                    <!-- Email Input Field -->
+                    <div>
+                        <label for="email-address" class="font-medium text-sm">Email address</label>
+                        <input id="email-address" name="email" type="email" autocomplete="email" required 
+                               class="mt-1 w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-delft-blue rounded-lg focus:outline-none focus:ring-2 focus:ring-powder-blue focus:border-transparent sm:text-sm" 
+                               placeholder="you@example.com">
+                    </div>
+                    <!-- Password Input Field -->
+                    <div>
+                        <label for="password" class="font-medium text-sm">Password</label>
+                        <input id="password" name="password" type="password" autocomplete="current-password" required 
+                               class="mt-1 w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-delft-blue rounded-lg focus:outline-none focus:ring-2 focus:ring-powder-blue focus:border-transparent sm:text-sm" 
+                               placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end">
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-powder-blue hover:text-delft-blue transition-colors">
+                            Forgot your password?
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Primary Sign In Button -->
+                <div>
+                    <button type="submit" 
+                            class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-full text-white bg-delft-blue hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-powder-blue transition-colors">
+                        Sign in
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+
+</body>
+</html>
