@@ -48,21 +48,19 @@
             </div>
 
             <!-- Login Form -->
-            <form class="mt-8 space-y-6" action="#" method="POST">
+            <form class="mt-8 space-y-6">
                 <div class="space-y-4 rounded-md">
-                    <!-- Email Input Field -->
+                    <!-- Email Input Field (Pre-filled) -->
                     <div>
                         <label for="email-address" class="font-medium text-sm">Email address</label>
-                        <input id="email-address" name="email" type="email" autocomplete="email" required 
-                               class="mt-1 w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-delft-blue rounded-lg focus:outline-none focus:ring-2 focus:ring-powder-blue focus:border-transparent sm:text-sm" 
-                               placeholder="you@example.com">
+                        <input id="email-address" name="email" type="email" required value="clinician@memopad.demo"
+                               class="mt-1 w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-delft-blue rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-powder-blue focus:border-transparent sm:text-sm">
                     </div>
-                    <!-- Password Input Field -->
+                    <!-- Password Input Field (Pre-filled) -->
                     <div>
                         <label for="password" class="font-medium text-sm">Password</label>
-                        <input id="password" name="password" type="password" autocomplete="current-password" required 
-                               class="mt-1 w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-delft-blue rounded-lg focus:outline-none focus:ring-2 focus:ring-powder-blue focus:border-transparent sm:text-sm" 
-                               placeholder="Password">
+                        <input id="password" name="password" type="password" required value="••••••••"
+                               class="mt-1 w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-delft-blue rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-powder-blue focus:border-transparent sm:text-sm">
                     </div>
                 </div>
 
@@ -74,12 +72,13 @@
                     </div>
                 </div>
 
-                <!-- Primary Sign In Button -->
+                <!-- Primary Button now acts as a link -->
                 <div>
-                    <button type="submit" 
-                            class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-full text-white bg-delft-blue hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-powder-blue transition-colors">
-                        Sign in
-                    </button>
+                    <!-- This 'a' tag will navigate to the dashboard -->
+                    <a href="./dashboard.html" 
+                       class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-full text-white bg-delft-blue hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-powder-blue transition-colors">
+                        Sign in (Proceed to Demo)
+                    </a>
                 </div>
             </form>
         </div>

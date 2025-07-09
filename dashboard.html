@@ -56,7 +56,7 @@
                 </a>
             </nav>
             <div class="p-4 border-t border-gray-200">
-                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                <a href="./login.html" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H3"></path></svg>
                     Logout
                 </a>
@@ -67,7 +67,6 @@
         <main class="flex-1 p-8 overflow-y-auto">
             <!-- This is the Patient List view, which would be visible by default -->
             <div id="patient-list-view">
-                <button id="back-to-dashboard" class="mb-4 text-sm font-medium text-powder-blue hover:text-delft-blue">&larr; Back to Dashboard</button>
                 <h2 class="font-oxygen text-3xl font-bold mb-6">Patient Dashboard</h2>
                 <div class="bg-white rounded-lg shadow overflow-hidden">
                     <table class="min-w-full">
@@ -103,31 +102,47 @@
 
             <!-- This is the Patient Detail View, hidden by default. JS will show this when a patient is clicked. -->
             <div id="patient-detail-view" class="hidden">
+                <!-- Back Button Added Here -->
+                <button id="back-to-dashboard" class="mb-4 text-sm font-medium text-powder-blue hover:text-delft-blue flex items-center transition-colors">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Back to Dashboard
+                </button>
                 <h2 class="font-oxygen text-3xl font-bold mb-6">Patient: Jane Doe</h2>
                 
                 <!-- Tab Navigation -->
                 <div class="border-b border-gray-200">
                     <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-                        <a href="#" class="border-powder-blue text-delft-blue whitespace-nowrap py-4 px-1 border-b-2 font-bold text-sm">Data & Insights</a>
-                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Appointments</a>
-                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Communication</a>
-                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Clinician's Notes</a>
+                        <a href="#" class="tab-link border-powder-blue text-delft-blue whitespace-nowrap py-4 px-1 border-b-2 font-bold text-sm">Data & Insights</a>
+                        <a href="#" class="tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Appointments</a>
+                        <a href="#" class="tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Communication</a>
+                        <a href="#" class="tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Clinician's Notes</a>
                     </nav>
                 </div>
 
-                <!-- Tab Content Placeholder -->
+                <!-- Tab Content Panels -->
                 <div class="mt-6">
-                    <!-- Content for "Data & Insights" will go here -->
-                    <div id="data-insights-content">
+                    <!-- Content for "Data & Insights" -->
+                    <div id="data-insights-content" class="tab-content">
                         <p class="text-gray-600">Placeholder for interactive calendar, charts, and journal feed, using the Master-Detail with Breadcrumbs pattern.</p>
                     </div>
                     <!-- Content for other tabs will be hidden by default -->
+                     <div id="appointments-content" class="tab-content hidden">
+                        <p class="text-gray-600">Placeholder for this patient's appointments list.</p>
+                    </div>
+                     <div id="communication-content" class="tab-content hidden">
+                        <p class="text-gray-600">Placeholder for the secure messaging interface.</p>
+                    </div>
+                     <div id="notes-content" class="tab-content hidden">
+                        <p class="text-gray-600">Placeholder for the clinician's private notes, with import/export functionality.</p>
+                    </div>
                 </div>
             </div>
 
         </main>
     </div>
-
+    
+    <!-- Link to the JavaScript file -->
     <script src="script.js"></script>
+
 </body>
 </html>

@@ -2,36 +2,31 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Get references to the main views ---
-    // This finds the HTML element with the ID 'patient-list-view'
     const patientListView = document.getElementById('patient-list-view');
-    // This finds the HTML element with the ID 'patient-detail-view'
     const patientDetailView = document.getElementById('patient-detail-view');
 
     // --- Get references to the interactive elements ---
-    // This finds all the patient rows in the table that can be clicked
-    const patientRows = document.querySelectorAll('tbody tr');
-    // This finds all the navigation tabs in the patient detail view
-    const tabs = document.querySelectorAll('#patient-detail-view nav a');
-    // This is a placeholder for the tab content panels. We will add these later.
-    // For now, we'll just manipulate the active state of the tabs themselves.
+    const patientRows = document.querySelectorAll('#patient-list-view tbody tr');
+    const tabs = document.querySelectorAll('.tab-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const backButton = document.getElementById('back-to-dashboard');
     
     /**
      * Function to switch to the Patient Detail View.
      * It hides the list and shows the detail view.
      */
     function showPatientDetail() {
-        patientListView.classList.add('hidden'); // Add the 'hidden' class to hide the list
-        patientDetailView.classList.remove('hidden'); // Remove the 'hidden' class to show the details
+        patientListView.classList.add('hidden');
+        patientDetailView.classList.remove('hidden');
     }
 
     /**
      * Function to switch back to the Patient List View.
      * It shows the list and hides the detail view.
-     * Note: We will need to add a "Back" button to the HTML to trigger this.
      */
     function showPatientList() {
-        patientListView.classList.remove('hidden'); // Remove the 'hidden' class to show the list
-        patientDetailView.classList.add('hidden'); // Add the 'hidden' class to hide the details
+        patientListView.classList.remove('hidden');
+        patientDetailView.classList.add('hidden');
     }
 
     // --- Add Event Listeners ---
@@ -39,14 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Add a click listener to each patient row in the table.
     patientRows.forEach(row => {
         row.addEventListener('click', () => {
-            // When a row is clicked, we call the function to show the detail view.
+            // When a row is clicked, show the detail view.
             // In a real app, you would also pass the specific patient's data here.
             showPatientDetail();
         });
     });
 
-    // 2. Add a click listener to each tab in the detail view.
-    tabs.forEach(clickedTab => {
+    // 2. Add a click listener for the "Back to Dashboard" button.
+    if (backButton) {
+        backButton.addEventListener('click', showPatientList);
+    }
+
+    // 3. Add a click listener to each tab to handle tab switching.
+    tabs.forEach((clickedTab, index) => {
         clickedTab.addEventListener('click', (event) => {
             // Prevent the link from trying to navigate to a new page
             event.preventDefault(); 
@@ -61,14 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
             clickedTab.classList.add('border-powder-blue', 'text-delft-blue', 'font-bold');
             clickedTab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'font-medium');
 
-            // In a real app, you would also show the corresponding content panel here.
-            // For this prototype, we are just updating the visual style of the tab.
+            // Now, hide all tab content panels
+            tabContents.forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // And finally, show only the content panel that corresponds to the clicked tab
+            if (tabContents[index]) {
+                tabContents[index].classList.remove('hidden');
+            }
         });
     });
-
-    // We would add a listener for a "Back" button here once it's added to the HTML.
-    // Example:
-    // const backButton = document.getElementById('back-to-dashboard');
-    // backButton.addEventListener('click', showPatientList);
 
 });
