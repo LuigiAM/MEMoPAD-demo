@@ -40,11 +40,14 @@
 </head>
 <body class="bg-eggshell font-inter text-delft-blue">
 
-    <div class="flex h-screen bg-eggshell">
+    <div class="relative min-h-screen md:flex">
+        <!-- MOBILE OVERLAY -->
+        <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden md:hidden"></div>
+
         <!-- Static Sidebar -->
-        <aside class="w-64 flex-shrink-0 bg-white flex flex-col shadow-lg">
+        <aside id="sidebar" class="bg-white w-64 flex-shrink-0 flex flex-col shadow-lg fixed inset-y-0 left-0 z-20 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out">
             <div class="h-20 flex items-center justify-center border-b border-gray-200">
-                <h1 class="font-oxygen text-2xl font-bold text-delft-blue"> <a href="https://memopad.luigiandreamoretti.com/">MEMoPAD</a></h1>
+                <h1 class="font-oxygen text-2xl font-bold text-delft-blue"> <a href="#">MEMoPAD</a></h1>
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2">
                 <a href="#" class="flex items-center px-4 py-2 text-delft-blue bg-powder-blue bg-opacity-20 rounded-lg font-bold" aria-current="page">
@@ -61,7 +64,7 @@
                 </a>
             </nav>
             <div class="p-4 border-t border-gray-200">
-                <a href="https://memopad-demo.luigiandreamoretti.com/" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H3"></path></svg>
                     Logout
                 </a>
@@ -69,11 +72,20 @@
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 p-8 overflow-y-auto">
+        <main class="flex-1 p-6 sm:p-8 overflow-y-auto">
+            <!-- MOBILE HEADER -->
+            <div class="flex items-center justify-between mb-8 md:hidden">
+                <button id="hamburger-button" class="p-2 -ml-2 rounded-md text-delft-blue">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+                </button>
+                <h2 id="mobile-header-title" class="font-oxygen text-xl font-bold">Patient Dashboard</h2>
+            </div>
+
             <!-- This is the Patient List view, which is visible by default -->
             <div id="patient-list-view">
-                <h2 class="font-oxygen text-3xl font-bold mb-6">Patient Dashboard</h2>
-                <div class="bg-white rounded-lg shadow overflow-hidden">
+                <h2 class="font-oxygen text-3xl font-bold mb-6 hidden md:block">Patient Dashboard</h2>
+                <!-- RESPONSIVE FIX: Table scrolls horizontally on small screens -->
+                <div class="bg-white rounded-lg shadow overflow-x-auto">
                     <table class="min-w-full">
                         <thead class="bg-gray-50 border-b border-gray-200">
                             <tr>
@@ -83,7 +95,6 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            <!-- UX/A11Y FIX: Entire row is clickable and keyboard accessible -->
                             <tr class="patient-row hover:bg-gray-50 cursor-pointer transition-colors" role="button" tabindex="0">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">Jane Doe</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">New Journal Entry</span></td>
@@ -110,14 +121,14 @@
                     <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     Back to Dashboard
                 </button>
-                <h2 class="font-oxygen text-3xl font-bold mb-6">Patient: Jane Doe</h2>
+                <h2 class="font-oxygen text-3xl font-bold mb-6 hidden md:block">Patient: Jane Doe</h2>
                 
-                <div class="border-b border-gray-200">
+                <div class="border-b border-gray-200 overflow-x-auto">
                     <nav class="-mb-px flex space-x-8" aria-label="Tabs" role="tablist">
-                        <a href="#" class="tab-link border-powder-blue text-delft-blue whitespace-nowrap py-4 px-1 border-b-2 font-bold text-sm" role="tab" aria-selected="true" aria-controls="data-insights-content">Data & Insights</a>
-                        <a href="#" class="tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors" role="tab" aria-selected="false" aria-controls="appointments-content">Appointments</a>
-                        <a href="#" class="tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors" role="tab" aria-selected="false" aria-controls="communication-content">Communication</a>
-                        <a href="#" class="tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors" role="tab" aria-selected="false" aria-controls="notes-content">Clinician's Notes</a>
+                        <a href="#" class="tab-link shrink-0 border-powder-blue text-delft-blue whitespace-nowrap py-4 px-1 border-b-2 font-bold text-sm" role="tab" aria-selected="true" aria-controls="data-insights-content">Data & Insights</a>
+                        <a href="#" class="tab-link shrink-0 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors" role="tab" aria-selected="false" aria-controls="appointments-content">Appointments</a>
+                        <a href="#" class="tab-link shrink-0 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors" role="tab" aria-selected="false" aria-controls="communication-content">Communication</a>
+                        <a href="#" class="tab-link shrink-0 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors" role="tab" aria-selected="false" aria-controls="notes-content">Clinician's Notes</a>
                     </nav>
                 </div>
 
@@ -437,6 +448,7 @@
     </div>
     
     <script src="script.js"></script>
+    <script src="mobile.js"></script>
 
 </body>
 </html>

@@ -38,11 +38,14 @@
 </head>
 <body class="bg-eggshell font-inter text-delft-blue">
 
-    <div class="flex h-screen bg-eggshell">
+    <div class="relative min-h-screen md:flex">
+        <!-- MOBILE OVERLAY -->
+        <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden md:hidden"></div>
+
         <!-- Static Sidebar -->
-        <aside class="w-64 flex-shrink-0 bg-white flex flex-col shadow-lg">
+        <aside id="sidebar" class="bg-white w-64 flex-shrink-0 flex flex-col shadow-lg fixed inset-y-0 left-0 z-20 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out">
             <div class="h-20 flex items-center justify-center border-b border-gray-200">
-                <h1 class="font-oxygen text-2xl font-bold text-delft-blue"> <a href="https://memopad.luigiandreamoretti.com/">MEMoPAD</a></h1>
+                <h1 class="font-oxygen text-2xl font-bold text-delft-blue"> <a href="#">MEMoPAD</a></h1>
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2">
                 <!-- Inactive Dashboard Link -->
@@ -62,7 +65,7 @@
                 </a>
             </nav>
             <div class="p-4 border-t border-gray-200">
-                <a href="https://memopad-demo.luigiandreamoretti.com/" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H3"></path></svg>
                     Logout
                 </a>
@@ -70,11 +73,19 @@
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 p-8 flex flex-col">
+        <main class="flex-1 p-6 sm:p-8 flex flex-col">
+            <!-- MOBILE HEADER -->
+            <div class="flex items-center justify-between mb-8 md:hidden">
+                <button id="hamburger-button" class="p-2 -ml-2 rounded-md text-delft-blue">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+                </button>
+                <h2 class="font-oxygen text-xl font-bold">Global Calendar</h2>
+            </div>
+            
             <!-- Calendar Header -->
-            <div class="flex items-center justify-between mb-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
                 <div class="flex items-center gap-4">
-                    <h2 class="font-oxygen text-3xl font-bold">July 2025</h2>
+                    <h2 class="font-oxygen text-2xl sm:text-3xl font-bold">July 2025</h2>
                     <div class="flex items-center gap-2">
                         <button class="p-2 rounded-full hover:bg-gray-200 transition-colors" aria-label="Previous week">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
@@ -91,10 +102,11 @@
                 </div>
             </div>
 
-            <!-- Weekly Calendar Grid -->
-            <div class="flex-1 grid grid-cols-[auto,1fr,1fr,1fr,1fr,1fr] grid-rows-[auto,repeat(10,1fr)] gap-px bg-gray-200 rounded-lg shadow-lg overflow-hidden">
-                <!-- Time Column -->
-                <div class="bg-white"></div>
+            <!-- Calendar Container -->
+            <!-- LAYOUT REVERT: Reverted to the simpler grid that works well on mobile without horizontal scroll -->
+            <div class="flex-1 grid grid-cols-1 md:grid-cols-[auto,1fr,1fr,1fr,1fr,1fr] grid-rows-[auto,repeat(10,1fr)] gap-px bg-gray-200 rounded-lg shadow-lg overflow-hidden border border-gray-200">
+                <!-- Time Column (hidden on mobile, shown on md+) -->
+                <div class="hidden md:block"></div>
                 <!-- Day Headers -->
                 <div class="bg-white p-3 text-center font-bold">Mon 7</div>
                 <div class="bg-white p-3 text-center font-bold">Tue 8</div>
@@ -103,142 +115,140 @@
                 <div class="bg-white p-3 text-center font-bold">Fri 11</div>
                 
                 <!-- Time Slots and Events -->
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">9:00 AM</div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">9:00 AM</div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Jane Doe</strong><br>Therapy Session
                     </div>
                 </div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-event-teal bg-opacity-80 text-white p-2 rounded-lg text-xs leading-tight">
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-event-teal bg-opacity-80 text-white p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>John Smith</strong><br>Check-in Call
                     </div>
                 </div>
-                <div class="bg-white relative"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
 
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">10:00 AM</div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">10:00 AM</div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Emily White</strong><br>Therapy Session
                     </div>
                 </div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Jane Doe</strong><br>Therapy Session
                     </div>
                 </div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-event-teal bg-opacity-80 text-white p-2 rounded-lg text-xs leading-tight">
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-event-teal bg-opacity-80 text-white p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>New Patient</strong><br>Initial Consultation
                     </div>
                 </div>
 
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">11:00 AM</div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">11:00 AM</div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Emily White</strong><br>Therapy Session
                     </div>
                 </div>
-                <div class="bg-white relative"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
 
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">12:00 PM</div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">12:00 PM</div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Lunch Break</strong>
                     </div>
                 </div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Lunch Break</strong>
                     </div>
                 </div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Lunch Break</strong>
                     </div>
                 </div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Lunch Break</strong>
                     </div>
                 </div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Lunch Break</strong>
                     </div>
                 </div>
 
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">1:00 PM</div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">1:00 PM</div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
                 
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">2:00 PM</div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">2:00 PM</div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>John Smith</strong><br>Therapy Session
                     </div>
                 </div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
 
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">3:00 PM</div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">3:00 PM</div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Jane Doe</strong><br>Therapy Session
                     </div>
                 </div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
 
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">4:00 PM</div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">4:00 PM</div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
 
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">5:00 PM</div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-gray-300 text-gray-700 p-2 rounded-lg text-xs leading-tight">
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">5:00 PM</div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-gray-300 text-gray-700 p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Admin Block</strong><br>Notes & Planning
                     </div>
                 </div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative">
-                    <div class="absolute inset-1 bg-gray-300 text-gray-700 p-2 rounded-lg text-xs leading-tight">
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]">
+                    <div class="absolute inset-1 bg-gray-300 text-gray-700 p-2 rounded-lg text-xs leading-tight overflow-hidden">
                         <strong>Admin Block</strong><br>Notes & Planning
                     </div>
                 </div>
-                <div class="bg-white relative"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
 
-                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">6:00 PM</div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-                <div class="bg-white relative"></div>
-
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3 hidden md:block">6:00 PM</div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
+                <div class="bg-white relative min-h-[4rem]"></div>
             </div>
         </main>
     </div>
     
-    <!-- We will add JavaScript later to handle view switching -->
-    <!-- <script src="calendar.js"></script> -->
+    <script src="mobile.js"></script>
 
 </body>
 </html>

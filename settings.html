@@ -35,11 +35,15 @@
 </head>
 <body class="bg-eggshell font-inter text-delft-blue">
 
-    <div class="flex h-screen bg-eggshell">
+    <div class="relative min-h-screen md:flex">
+        <!-- MOBILE OVERLAY -->
+        <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden md:hidden"></div>
+
         <!-- Static Sidebar -->
-        <aside class="w-64 flex-shrink-0 bg-white flex flex-col shadow-lg">
+        <!-- RESPONSIVE FIX: Sidebar is now positioned for mobile and transitions -->
+        <aside id="sidebar" class="bg-white w-64 flex-shrink-0 flex flex-col shadow-lg fixed inset-y-0 left-0 z-20 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out">
             <div class="h-20 flex items-center justify-center border-b border-gray-200">
-                <h1 class="font-oxygen text-2xl font-bold text-delft-blue"> <a href="https://memopad.luigiandreamoretti.com/">MEMoPAD</a></h1>
+                <h1 class="font-oxygen text-2xl font-bold text-delft-blue"> <a href="#">MEMoPAD</a></h1>
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2">
                 <!-- Inactive Dashboard Link -->
@@ -59,7 +63,7 @@
                 </a>
             </nav>
             <div class="p-4 border-t border-gray-200">
-                <a href="https://memopad-demo.luigiandreamoretti.com/" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H3"></path></svg>
                     Logout
                 </a>
@@ -67,12 +71,21 @@
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 p-8 overflow-y-auto">
-            <h2 class="font-oxygen text-3xl font-bold mb-8">Settings</h2>
+        <main class="flex-1 p-6 sm:p-8">
+             <!-- MOBILE HEADER -->
+            <div class="flex items-center justify-between mb-8 md:hidden">
+                <button id="hamburger-button" class="p-2 -ml-2 rounded-md text-delft-blue">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+                </button>
+                <h2 class="font-oxygen text-xl font-bold">Settings</h2>
+            </div>
+            
+            <h2 class="font-oxygen text-3xl font-bold mb-8 hidden md:block">Settings</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- RESPONSIVE FIX: Grid stacks on mobile, two-column on desktop -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <!-- Settings Navigation -->
-                <div class="md:col-span-1">
+                <div class="lg:col-span-1">
                     <nav class="space-y-1">
                         <a href="#profile" class="group flex items-center px-3 py-2 text-sm font-bold text-delft-blue bg-powder-blue bg-opacity-20 rounded-lg">
                             Profile Information
@@ -90,7 +103,7 @@
                 </div>
 
                 <!-- Settings Content -->
-                <div class="md:col-span-3 space-y-8">
+                <div class="lg:col-span-3 space-y-8">
                     
                     <!-- Professional Profile Card -->
                     <div id="profile" class="bg-white p-6 rounded-lg shadow">
@@ -218,8 +231,8 @@
         </main>
     </div>
     
-    <!-- We will add JavaScript later to handle view switching -->
-    <!-- <script src="settings.js"></script> -->
+    <!-- Link to the new mobile navigation script -->
+    <script src="mobile.js"></script>
 
 </body>
 </html>
