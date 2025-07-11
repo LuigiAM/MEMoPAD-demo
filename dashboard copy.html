@@ -232,37 +232,28 @@
                                     <div class="h-24 bg-gray-100 rounded-lg p-2 text-gray-400">3</div>
                                 </div>
                             </div>
-    <div id="weekly-view" class="hidden space-y-8">
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                                <div class="bg-white p-4 rounded-lg shadow relative">
-                                    <h3 class="font-oxygen font-bold text-lg mb-4">Daily Zone Breakdown</h3>
-                                    <img src="./public/bar_chart.webp" alt="Bar chart showing daily zone hours" class="w-full h-auto rounded max-h-80 object-contain">
-                                    <button class="absolute top-4 right-4 text-xs font-semibold text-powder-blue hover:text-delft-blue flex items-center gap-1">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
-                                        Attach to note
-                                    </button>
-                                </div>
-                                <div class="bg-white p-4 rounded-lg shadow relative">
-                                    <h3 class="font-oxygen font-bold text-lg mb-4">Weekly Zone Summary</h3>
-                                    <img src="./public/circular_chart.webp" alt="Donut chart showing weekly zone summary" class="w-full h-auto rounded max-h-80 object-contain">
-                                     <button class="absolute top-4 right-4 text-xs font-semibold text-powder-blue hover:text-delft-blue flex items-center gap-1">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
-                                        Attach to note
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-lg shadow">
-                                <div class="p-6">
-                                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
-                                        <h3 class="font-oxygen font-bold text-lg">Explore Patterns (Correlations)</h3>
-                                        <div class="flex items-center gap-2 bg-gray-100 p-1 rounded-lg">
-                                            <button class="px-3 py-1 text-sm font-semibold bg-white text-delft-blue rounded-md shadow">This Week</button>
-                                            <button class="px-3 py-1 text-sm font-semibold text-gray-600">This Month</button>
-                                            <button class="px-3 py-1 text-sm font-semibold text-gray-600">This Year</button>
-                                        </div>
+
+                            <div id="weekly-view" class="hidden space-y-12">
+                                <!-- LAYOUT FIX: Reduced padding and added max-height to images -->
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                    <div class="bg-white p-4 rounded-lg shadow">
+                                        <h3 class="font-oxygen font-bold text-lg mb-4">Daily Zone Breakdown</h3>
+                                        <img src="./public/bar_chart.webp" alt="Bar chart showing daily zone hours" class="w-full h-auto rounded max-h-80 object-contain">
                                     </div>
-                                    <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 pt-4 border-t border-gray-100">
-                                        <div class="flex items-center gap-4">
+                                    <div class="bg-white p-4 rounded-lg shadow">
+                                        <h3 class="font-oxygen font-bold text-lg mb-4">Weekly Zone Summary</h3>
+                                        <img src="./public/circular_chart.webp" alt="Donut chart showing weekly zone summary" class="w-full h-auto rounded max-h-80 object-contain">
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-lg shadow">
+                                    <button id="expand-correlations" class="w-full text-left p-4 focus:outline-none focus:ring-2 focus:ring-powder-blue rounded-lg" aria-expanded="false" aria-controls="correlations-content">
+                                        <div class="flex justify-between items-center">
+                                            <h3 class="font-oxygen font-bold text-lg">Explore Patterns (Correlations)</h3>
+                                            <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                        </div>
+                                    </button>
+                                    <div id="correlations-content" class="hidden p-4 border-t border-gray-200">
+                                        <div class="flex items-center space-x-4 mb-4">
                                             <select class="p-2 border rounded-lg bg-white">
                                                 <option>Time in Red Zone</option>
                                                 <option>Time in Yellow Zone</option>
@@ -285,18 +276,12 @@
                                                 <option>Screen Time</option>
                                             </select>
                                         </div>
-                                        <button class="text-sm text-powder-blue font-semibold hover:text-delft-blue">Find Significant Correlations</button>
-                                        <button class="text-sm text-powder-blue font-semibold hover:text-delft-blue">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
-                                            Attach to note
-                                        </button>
+                                        <div class="bg-white p-4 rounded-lg shadow">
+                                            <img src="./public/scatter_plot.webp" alt="Scatter plot showing correlation between sleep and red zone time" class="w-full h-auto rounded max-h-80 object-contain">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="p-6 border-t border-gray-200">
-                                    <img src="./public/scatter_plot.webp" alt="Scatter plot showing correlation between sleep and red zone time" class="w-full h-auto rounded">
-                                </div>
                             </div>
-                        </div>
 
                             <div id="daily-view" class="hidden">
                                 <div class="flex space-x-6">
@@ -495,7 +480,6 @@
                                     <button class="text-sm font-semibold text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100">Cancel</button>
                                     <button class="text-sm font-semibold text-white bg-delft-blue px-4 py-2 rounded-lg hover:bg-opacity-90">Save Note</button>
                                 </div>
-                            </div>
                             </div>
                             <!-- Note 1 -->
                             <div class="bg-white p-6 rounded-lg shadow">
