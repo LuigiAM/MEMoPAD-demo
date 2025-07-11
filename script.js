@@ -1,22 +1,28 @@
 // This function will run once the entire HTML document has been loaded.
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- State Variable ---
+    let currentPatientId = null;
+
     // --- Get references to the main views ---
     const patientListView = document.getElementById('patient-list-view');
     const patientDetailView = document.getElementById('patient-detail-view');
 
-    // --- Get references to the interactive elements ---
-    const patientRows = document.querySelectorAll('#patient-list-view tbody tr');
+    // --- Get references to interactive elements ---
+    // JS FIX: Select the new patient buttons instead of the whole row
+    const patientButtons = document.querySelectorAll('.patient-button');
     const tabs = document.querySelectorAll('.tab-link');
     const tabContents = document.querySelectorAll('.tab-content');
     const backButton = document.getElementById('back-to-dashboard');
+    const patientNameHeader = document.querySelector('#patient-detail-view h2');
 
     // --- Get references for the Data & Insights Tab ---
     const monthlyView = document.getElementById('monthly-view');
     const weeklyView = document.getElementById('weekly-view');
     const dailyView = document.getElementById('daily-view');
-    const calendarDays = document.querySelectorAll('#monthly-view .grid > div[class*="bg-"]');
-    const weeklyStatsButtons = document.querySelectorAll('#monthly-view button.w-full'); // More specific selector
+    // JS FIX: Select calendar days using the new, robust data attribute
+    const calendarDays = document.querySelectorAll('.calendar-day');
+    const weeklyStatsButtons = document.querySelectorAll('#monthly-view .col-span-7 > button');
     const breadcrumbOl = document.getElementById('breadcrumb')?.querySelector('ol');
     
     // --- Get references for the expandable correlations card ---
@@ -65,11 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Function to switch to the Patient Detail View.
+     * @param {string} patientName - The name of the patient clicked.
      */
-    function showPatientDetail() {
+    function showPatientDetail(patientName) {
+        currentPatientId = patientName.toLowerCase().replace(' ', '-');
+        
+        if (patientNameHeader) {
+            patientNameHeader.textContent = `Patient: ${patientName}`;
+        }
+        
         if (patientListView) patientListView.classList.add('hidden');
         if (patientDetailView) patientDetailView.classList.remove('hidden');
-        showMonthlyView(); // Default to monthly view when a new patient is selected
+        
+        // Reset to the first tab ('Data & Insights') when showing a new patient
+        handleTabClick(tabs[0], 0); 
     }
 
     /**
@@ -78,8 +93,42 @@ document.addEventListener('DOMContentLoaded', () => {
     function showPatientList() {
         if (patientListView) patientListView.classList.remove('hidden');
         if (patientDetailView) patientDetailView.classList.add('hidden');
+        currentPatientId = null; // Reset the current patient
     }
 
+    /**
+     * Handles the logic for clicking a tab.
+     * @param {HTMLElement} clickedTab - The tab element that was clicked.
+     * @param {number} index - The index of the clicked tab.
+     */
+    function handleTabClick(clickedTab, index) {
+        // Style the tabs and manage ARIA attributes
+        tabs.forEach((tab, i) => {
+            const isActive = (i === index);
+            tab.classList.toggle('border-powder-blue', isActive);
+            tab.classList.toggle('text-delft-blue', isActive);
+            tab.classList.toggle('font-bold', isActive);
+            
+            tab.classList.toggle('border-transparent', !isActive);
+            tab.classList.toggle('text-gray-500', !isActive);
+            tab.classList.toggle('hover:text-gray-700', !isActive);
+            tab.classList.toggle('hover:border-gray-300', !isActive);
+            tab.classList.toggle('font-medium', !isActive);
+
+            tab.setAttribute('aria-selected', isActive);
+        });
+
+        // Show the correct content panel
+        tabContents.forEach((content, i) => {
+            const isActive = (i === index);
+            content.classList.toggle('hidden', !isActive);
+        });
+        
+        // Special logic for Data & Insights tab to reset its view
+        if (tabContents[index] && tabContents[index].id === 'data-insights-content') {
+            showMonthlyView();
+        }
+    }
 
     /**
      * Dynamically updates the breadcrumb trail.
@@ -95,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const baseBreadcrumbLink = document.getElementById('breadcrumb-base');
         if (baseBreadcrumbLink) {
-            baseBreadcrumbLink.textContent = 'Monthly View'; // Reset base text
+            baseBreadcrumbLink.textContent = 'Monthly View';
             baseBreadcrumbLink.onclick = (e) => { e.preventDefault(); showMonthlyView(); };
         }
 
@@ -104,11 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const weekLink = addBreadcrumbLink(week, () => showWeeklyView(week));
             if (day) {
                 addBreadcrumbSeparator();
-                addBreadcrumbLink(`Day ${day}`, null, true); // This is the current page
+                addBreadcrumbLink(`Day ${day}`, null, true);
             } else {
                 if (weekLink) {
-                   weekLink.classList.add('text-delft-blue', 'font-bold');
-                   weekLink.classList.remove('text-gray-700');
+                    weekLink.classList.add('text-delft-blue', 'font-bold');
+                    weekLink.classList.remove('text-gray-700');
                 }
             }
         }
@@ -141,8 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Add Event Listeners ---
     
     // 1. Patient List Clicks
-    patientRows.forEach(row => {
-        row.addEventListener('click', showPatientDetail);
+    patientButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const patientName = button.textContent.trim();
+            showPatientDetail(patientName);
+        });
     });
 
     // 2. Back to Dashboard Button
@@ -154,52 +206,34 @@ document.addEventListener('DOMContentLoaded', () => {
     tabs.forEach((clickedTab, index) => {
         clickedTab.addEventListener('click', (event) => {
             event.preventDefault();
-            tabs.forEach(tab => {
-                tab.classList.remove('border-powder-blue', 'text-delft-blue', 'font-bold');
-                tab.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'font-medium');
-            });
-            clickedTab.classList.add('border-powder-blue', 'text-delft-blue', 'font-bold');
-            tabContents.forEach(content => content.classList.add('hidden'));
-            if (tabContents[index]) {
-                tabContents[index].classList.remove('hidden');
-                // When switching to the Data & Insights tab, always default to the monthly view
-                if (tabContents[index].id === 'data-insights-content') {
-                    showMonthlyView();
-                }
-            }
+            handleTabClick(clickedTab, index);
         });
     });
 
-    // 4. Calendar Day Clicks
+    // 4. Calendar Day Clicks (JS FIX)
     calendarDays.forEach(dayElement => {
         dayElement.addEventListener('click', () => {
-            const dayNumber = dayElement.innerText.trim();
-            // For this demo, we'll find which week this day belongs to
-            let weekName = 'Selected Week';
-            let parent = dayElement.parentElement;
-            while(parent) {
-                const weekButton = parent.previousElementSibling;
-                if(weekButton && weekButton.matches('.col-span-7 > button')) {
-                    weekName = weekButton.textContent.replace('Display statistics for ', '');
-                    break;
-                }
-                parent = parent.previousElementSibling;
-            }
+            // Use the robust data attributes
+            const dayNumber = dayElement.dataset.day;
+            const weekName = dayElement.dataset.weekName;
             showDailyView(weekName, dayNumber);
         });
     });
 
     // 5. Weekly Statistics Button Clicks
-    weeklyStatsButtons.forEach((button, index) => {
+    weeklyStatsButtons.forEach((button) => {
         button.addEventListener('click', () => {
-            // For this demo, we'll just use the index to name the week
-            showWeeklyView(`Week ${index + 1} of July`);
+            // Extract week name from the button's text for clarity
+            const weekName = button.textContent.replace('Display statistics for ', '');
+            showWeeklyView(weekName);
         });
     });
 
     // 6. Expand/Collapse Correlations Card
     if (expandCorrelationsButton) {
         expandCorrelationsButton.addEventListener('click', () => {
+            const isExpanded = expandCorrelationsButton.getAttribute('aria-expanded') === 'true';
+            expandCorrelationsButton.setAttribute('aria-expanded', !isExpanded);
             if(correlationsContent) correlationsContent.classList.toggle('hidden');
             if(expandIcon) expandIcon.classList.toggle('rotate-180');
         });
