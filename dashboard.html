@@ -332,12 +332,100 @@
                         </div>
                     </div>
 
+                    <!-- CONTENT UPDATE: Communication Tab -->
                     <div id="communication-content" class="tab-content hidden" role="tabpanel">
-                        <p class="text-gray-600">Placeholder for the secure messaging interface.</p>
+                        <div class="bg-white shadow rounded-lg flex flex-col h-[70vh]">
+                            <!-- Chat Messages Area -->
+                            <div class="p-6 space-y-6 flex-1 overflow-y-auto">
+                                <!-- Clinician Message -->
+                                <div class="flex items-start gap-3">
+                                    <span class="flex-shrink-0 inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-200">
+                                        <span class="text-md font-bold text-delft-blue">C</span>
+                                    </span>
+                                    <div class="flex flex-col gap-1">
+                                        <div class="bg-powder-blue bg-opacity-30 p-3 rounded-lg rounded-tl-none">
+                                            <p class="text-sm">Hi Jane, checking in. How have things been since our last session?</p>
+                                        </div>
+                                        <span class="text-xs text-gray-400">Yesterday, 4:32 PM</span>
+                                    </div>
+                                </div>
+                                <!-- Patient Message -->
+                                <div class="flex items-start gap-3 justify-end">
+                                    <div class="flex flex-col gap-1 items-end">
+                                        <div class="bg-delft-blue text-white p-3 rounded-lg rounded-br-none">
+                                            <p class="text-sm">Hey! Things are okay. A bit up and down. I sent over my summary for the week.</p>
+                                        </div>
+                                        <div class="bg-delft-blue text-white p-3 rounded-lg rounded-br-none mt-2">
+                                            <!-- Placeholder for the chart from the image -->
+                                            <div class="flex items-center space-x-1 h-16">
+                                                <div class="w-2 bg-zone-green h-full rounded-full"></div>
+                                                <div class="w-2 bg-zone-green h-3/4 rounded-full"></div>
+                                                <div class="w-2 bg-zone-yellow h-1/2 rounded-full"></div>
+                                                <div class="w-2 bg-zone-red h-3/4 rounded-full"></div>
+                                                <div class="w-2 bg-zone-green h-full rounded-full"></div>
+                                                <div class="w-2 bg-zone-blue h-1/2 rounded-full"></div>
+                                                <div class="w-2 bg-zone-blue h-5/6 rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-400">Yesterday, 4:35 PM</span>
+                                    </div>
+                                    <span class="flex-shrink-0 inline-flex items-center justify-center h-10 w-10 rounded-full bg-powder-blue">
+                                        <span class="text-md font-bold text-delft-blue">JD</span>
+                                    </span>
+                                </div>
+                                 <!-- Clinician Message -->
+                                <div class="flex items-start gap-3">
+                                    <span class="flex-shrink-0 inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-200">
+                                        <span class="text-md font-bold text-delft-blue">C</span>
+                                    </span>
+                                    <div class="flex flex-col gap-1">
+                                        <div class="bg-powder-blue bg-opacity-30 p-3 rounded-lg rounded-tl-none">
+                                            <p class="text-sm">Thanks for sending that. It looks like you had some good moments in the green and blue zones, but also a significant spike of anxiety on Thursday. Can you tell me more about what was happening then?</p>
+                                        </div>
+                                        <span class="text-xs text-gray-400">Today, 9:01 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Message Input Area -->
+                            <div class="p-4 bg-gray-50 border-t border-gray-200">
+                                <div class="relative">
+                                    <input type="text" placeholder="Type your message..." class="w-full pl-4 pr-20 py-3 rounded-full border-gray-300 focus:ring-powder-blue focus:border-powder-blue">
+                                    <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-delft-blue hover:bg-opacity-90 text-white font-semibold px-6 py-2 rounded-full transition-colors">
+                                        Send
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- CONTENT UPDATE: Clinician's Notes Tab -->
                     <div id="notes-content" class="tab-content hidden" role="tabpanel">
-                        <p class="text-gray-600">Placeholder for the clinician's private notes, with import/export functionality.</p>
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-oxygen font-bold text-lg">Private Notes for Jane Doe</h3>
+                                <button class="bg-delft-blue hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-lg transition-colors">Add New Note</button>
+                            </div>
+                            <!-- Note 1 -->
+                            <div class="bg-white p-6 rounded-lg shadow">
+                                <p class="text-sm font-semibold text-gray-500">June 28, 2025 - Session Note</p>
+                                <h4 class="font-oxygen font-bold text-md mt-1">Progress on Social Anxiety & Avoidance</h4>
+                                <p class="mt-3 text-sm text-gray-700 leading-relaxed">
+                                    Jane reports successfully attending the work social event we discussed. She utilized the 5-4-3-2-1 grounding technique upon arrival, which she said helped manage the initial wave of panic. She stayed for 45 minutes, longer than her 30-minute goal. Reports feeling "drained but proud" afterwards. We identified her core fear as being judged for not knowing what to say.
+                                    <br><br>
+                                    <strong>Plan:</strong> Continue with graded exposure. Next goal is to initiate a brief, low-stakes conversation with one colleague at the next team meeting. We also role-played conversation starters.
+                                </p>
+                            </div>
+                            <!-- Note 2 -->
+                            <div class="bg-white p-6 rounded-lg shadow">
+                                <p class="text-sm font-semibold text-gray-500">June 14, 2025 - Session Note</p>
+                                <h4 class="font-oxygen font-bold text-md mt-1">Identifying Cognitive Distortions</h4>
+                                <p class="mt-3 text-sm text-gray-700 leading-relaxed">
+                                    Session focused on identifying automatic negative thoughts (ANTs) related to her generalized anxiety. We introduced the concept of cognitive distortions. Jane was able to identify frequent "catastrophizing" (e.g., "If I miss this deadline, I'll get fired") and "mind reading" (e.g., "I know my boss thinks I'm incompetent").
+                                    <br><br>
+                                    <strong>Homework:</strong> Use the provided thought record worksheet to log at least one ANT per day, identify the distortion, and formulate a balanced, alternative thought. This will be the focus of our next session.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
