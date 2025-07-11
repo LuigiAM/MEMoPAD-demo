@@ -40,7 +40,6 @@
         <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden md:hidden"></div>
 
         <!-- Static Sidebar -->
-        <!-- RESPONSIVE FIX: Sidebar is now positioned for mobile and transitions -->
         <aside id="sidebar" class="bg-white w-64 flex-shrink-0 flex flex-col shadow-lg fixed inset-y-0 left-0 z-20 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out">
             <div class="h-20 flex items-center justify-center border-b border-gray-200">
                 <h1 class="font-oxygen text-2xl font-bold text-delft-blue"> <a href="#">MEMoPAD</a></h1>
@@ -92,6 +91,10 @@
                         </a>
                         <a href="#contact" class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
                             Contact & Location
+                        </a>
+                        <!-- EDIT: Added Patient Connections Link -->
+                        <a href="#connections" class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
+                            Patient Connections
                         </a>
                         <a href="#preferences" class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
                             Preferences
@@ -164,6 +167,46 @@
                         </div>
                     </div>
 
+                    <!-- EDIT: Added Patient Connections Card -->
+                    <div id="connections" class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="font-oxygen text-xl font-bold mb-6">Patient Connections</h3>
+                        <div class="space-y-6">
+                            <!-- Discoverability -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label for="discoverable" class="font-medium text-gray-700">Discoverability</label>
+                                    <p class="text-sm text-gray-500">Allow patients to find you using your ID.</p>
+                                </div>
+                                <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-powder-blue bg-delft-blue" role="switch" aria-checked="true">
+                                    <span class="sr-only">Use setting</span>
+                                    <span aria-hidden="true" class="inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-5"></span>
+                                </button>
+                            </div>
+                            <!-- Clinician ID -->
+                            <div>
+                                <label for="memopad-id" class="block text-sm font-medium text-gray-700">Your MEMoPAD ID</label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+                                    <input type="text" id="memopad-id" value="dr-eleanor-vance" class="flex-1 block w-full rounded-none rounded-l-md border-gray-300 focus:ring-powder-blue focus:border-powder-blue sm:text-sm" readonly>
+                                    <button class="relative -ml-px inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-powder-blue focus:border-powder-blue">
+                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                        <span>Edit</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Patient Search -->
+                             <div>
+                                <label for="search-patient" class="block text-sm font-medium text-gray-700">Connect with a new patient</label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+                                    <input type="text" id="search-patient" placeholder="Enter patient's MEMoPAD ID" class="flex-1 block w-full rounded-none rounded-l-md border-gray-300 focus:ring-powder-blue focus:border-powder-blue sm:text-sm">
+                                    <button class="relative -ml-px inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-powder-blue focus:border-powder-blue">
+                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                        <span>Search</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Preferences Card -->
                     <div id="preferences" class="bg-white p-6 rounded-lg shadow">
                         <h3 class="font-oxygen text-xl font-bold mb-6">Preferences</h3>
@@ -231,7 +274,6 @@
         </main>
     </div>
     
-    <!-- Link to the new mobile navigation script -->
     <script src="mobile.js"></script>
 
 </body>
