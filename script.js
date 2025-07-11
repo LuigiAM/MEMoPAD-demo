@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const patientDetailView = document.getElementById('patient-detail-view');
 
     // --- Get references to interactive elements ---
-    // JS FIX: Select the new patient buttons instead of the whole row
-    const patientButtons = document.querySelectorAll('.patient-button');
+    const patientRows = document.querySelectorAll('.patient-row');
     const tabs = document.querySelectorAll('.tab-link');
     const tabContents = document.querySelectorAll('.tab-content');
     const backButton = document.getElementById('back-to-dashboard');
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthlyView = document.getElementById('monthly-view');
     const weeklyView = document.getElementById('weekly-view');
     const dailyView = document.getElementById('daily-view');
-    // JS FIX: Select calendar days using the new, robust data attribute
     const calendarDays = document.querySelectorAll('.calendar-day');
     const weeklyStatsButtons = document.querySelectorAll('#monthly-view .col-span-7 > button');
     const breadcrumbOl = document.getElementById('breadcrumb')?.querySelector('ol');
@@ -81,10 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (patientListView) patientListView.classList.add('hidden');
-        if (patientDetailView) patientDetailView.classList.remove('hidden');
+        // FIX: This line was incorrectly adding 'hidden'. It should remove it.
+        if (patientDetailView) patientDetailView.classList.remove('hidden'); 
         
         // Reset to the first tab ('Data & Insights') when showing a new patient
-        handleTabClick(tabs[0], 0); 
+        if (tabs.length > 0) {
+            handleTabClick(tabs[0], 0); 
+        }
     }
 
     /**
@@ -190,10 +191,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Add Event Listeners ---
     
     // 1. Patient List Clicks
-    patientButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const patientName = button.textContent.trim();
+    patientRows.forEach(row => {
+        // Handle mouse click
+        row.addEventListener('click', () => {
+            const patientName = row.querySelector('td').textContent.trim();
             showPatientDetail(patientName);
+        });
+
+        // Handle keyboard interaction for accessibility
+        row.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault(); // Prevent spacebar from scrolling the page
+                const patientName = row.querySelector('td').textContent.trim();
+                showPatientDetail(patientName);
+            }
         });
     });
 
@@ -210,10 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Calendar Day Clicks (JS FIX)
+    // 4. Calendar Day Clicks
     calendarDays.forEach(dayElement => {
         dayElement.addEventListener('click', () => {
-            // Use the robust data attributes
             const dayNumber = dayElement.dataset.day;
             const weekName = dayElement.dataset.weekName;
             showDailyView(weekName, dayNumber);
@@ -223,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Weekly Statistics Button Clicks
     weeklyStatsButtons.forEach((button) => {
         button.addEventListener('click', () => {
-            // Extract week name from the button's text for clarity
             const weekName = button.textContent.replace('Display statistics for ', '');
             showWeeklyView(weekName);
         });

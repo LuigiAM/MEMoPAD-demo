@@ -83,24 +83,19 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="patient-button text-left font-medium text-delft-blue hover:text-powder-blue focus:outline-none focus:ring-2 focus:ring-powder-blue rounded">Jane Doe</button>
-                                </td>
+                            <!-- UX/A11Y FIX: Entire row is clickable and keyboard accessible -->
+                            <tr class="patient-row hover:bg-gray-50 cursor-pointer transition-colors" role="button" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">Jane Doe</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">New Journal Entry</span></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">July 10, 2025</td>
                             </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="patient-button text-left font-medium text-delft-blue hover:text-powder-blue focus:outline-none focus:ring-2 focus:ring-powder-blue rounded">John Smith</button>
-                                </td>
+                            <tr class="patient-row hover:bg-gray-50 cursor-pointer transition-colors" role="button" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">John Smith</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Appointment Soon</span></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">July 12, 2025</td>
                             </tr>
-                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="patient-button text-left font-medium text-delft-blue hover:text-powder-blue focus:outline-none focus:ring-2 focus:ring-powder-blue rounded">Emily White</button>
-                                </td>
+                             <tr class="patient-row hover:bg-gray-50 cursor-pointer transition-colors" role="button" tabindex="0">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">Emily White</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">No new data</span></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">August 1, 2025</td>
                             </tr>
@@ -207,24 +202,25 @@
                             </div>
 
                             <div id="weekly-view" class="hidden space-y-12">
+                                <!-- LAYOUT FIX: Reduced padding and added max-height to images -->
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                                    <div class="bg-white p-6 rounded-lg shadow">
+                                    <div class="bg-white p-4 rounded-lg shadow">
                                         <h3 class="font-oxygen font-bold text-lg mb-4">Daily Zone Breakdown</h3>
-                                        <img src="./public/bar_chart.webp" alt="Bar chart showing daily zone hours" class="w-full h-auto rounded">
+                                        <img src="./public/bar_chart.webp" alt="Bar chart showing daily zone hours" class="w-full h-auto rounded max-h-80 object-contain">
                                     </div>
-                                    <div class="bg-white p-6 rounded-lg shadow">
+                                    <div class="bg-white p-4 rounded-lg shadow">
                                         <h3 class="font-oxygen font-bold text-lg mb-4">Weekly Zone Summary</h3>
-                                        <img src="./public/circular_chart.webp" alt="Donut chart showing weekly zone summary" class="w-full h-auto rounded">
+                                        <img src="./public/circular_chart.webp" alt="Donut chart showing weekly zone summary" class="w-full h-auto rounded max-h-80 object-contain">
                                     </div>
                                 </div>
                                 <div class="bg-white rounded-lg shadow">
-                                    <button id="expand-correlations" class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-powder-blue rounded-lg" aria-expanded="false" aria-controls="correlations-content">
+                                    <button id="expand-correlations" class="w-full text-left p-4 focus:outline-none focus:ring-2 focus:ring-powder-blue rounded-lg" aria-expanded="false" aria-controls="correlations-content">
                                         <div class="flex justify-between items-center">
                                             <h3 class="font-oxygen font-bold text-lg">Explore Patterns (Correlations)</h3>
                                             <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </div>
                                     </button>
-                                    <div id="correlations-content" class="hidden p-6 border-t border-gray-200">
+                                    <div id="correlations-content" class="hidden p-4 border-t border-gray-200">
                                         <div class="flex items-center space-x-4 mb-4">
                                             <select class="p-2 border rounded-lg bg-white">
                                                 <option>Time in Red Zone</option>
@@ -248,8 +244,8 @@
                                                 <option>Screen Time</option>
                                             </select>
                                         </div>
-                                        <div class="bg-white p-6 rounded-lg shadow">
-                                            <img src="./public/scatter_plot.webp" alt="Scatter plot showing correlation between sleep and red zone time" class="w-full h-auto rounded">
+                                        <div class="bg-white p-4 rounded-lg shadow">
+                                            <img src="./public/scatter_plot.webp" alt="Scatter plot showing correlation between sleep and red zone time" class="w-full h-auto rounded max-h-80 object-contain">
                                         </div>
                                     </div>
                                 </div>
