@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - MEMoPAD Clinician Portal</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Oxygen (for headings) and Inter (for UI text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Configuration for Tailwind CSS -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'oxygen': ['Oxygen', 'sans-serif'],
+              'inter': ['Inter', 'sans-serif'],
+            },
+            colors: {
+              // Our defined Design System colors
+              'eggshell': '#F0EBD8',      // Primary Background
+              'powder-blue': '#A4B0F5',   // Accent Color
+              'delft-blue': '#414066',    // Primary Text & Action Color
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-eggshell font-inter text-delft-blue">
+
+    <div class="flex h-screen bg-eggshell">
+        <!-- Static Sidebar -->
+        <aside class="w-64 flex-shrink-0 bg-white flex flex-col shadow-lg">
+            <div class="h-20 flex items-center justify-center border-b border-gray-200">
+                <h1 class="font-oxygen text-2xl font-bold text-delft-blue"> <a href="https://memopad.luigiandreamoretti.com/">MEMoPAD</a></h1>
+            </div>
+            <nav class="flex-1 px-4 py-6 space-y-2">
+                <!-- Inactive Dashboard Link -->
+                <a href="dashboard.html" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    Dashboard
+                </a>
+                <!-- Inactive Global Calendar Link -->
+                <a href="calendar.html" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Global Calendar
+                </a>
+                <!-- Active Settings Link -->
+                <a href="#" class="flex items-center px-4 py-2 text-delft-blue bg-powder-blue bg-opacity-20 rounded-lg font-bold" aria-current="page">
+                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Settings
+                </a>
+            </nav>
+            <div class="p-4 border-t border-gray-200">
+                <a href="https://memopad-demo.luigiandreamoretti.com/" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H3"></path></svg>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-8 overflow-y-auto">
+            <h2 class="font-oxygen text-3xl font-bold mb-8">Settings</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Settings Navigation -->
+                <div class="md:col-span-1">
+                    <nav class="space-y-1">
+                        <a href="#profile" class="group flex items-center px-3 py-2 text-sm font-bold text-delft-blue bg-powder-blue bg-opacity-20 rounded-lg">
+                            Profile Information
+                        </a>
+                        <a href="#contact" class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
+                            Contact & Location
+                        </a>
+                        <a href="#preferences" class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
+                            Preferences
+                        </a>
+                        <a href="#integrations" class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
+                            Integrations
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Settings Content -->
+                <div class="md:col-span-3 space-y-8">
+                    
+                    <!-- Professional Profile Card -->
+                    <div id="profile" class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="font-oxygen text-xl font-bold mb-6">Professional Profile</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-6">
+                                <img class="h-20 w-20 rounded-full object-cover" src="https://placehold.co/100x100/A4B0F5/414066?text=You" alt="Your profile picture">
+                                <div>
+                                    <label for="photo-upload" class="cursor-pointer bg-delft-blue text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-colors">Upload New Photo</label>
+                                    <input type="file" id="photo-upload" class="hidden">
+                                    <p class="text-xs text-gray-500 mt-2">PNG, JPG, GIF up to 10MB.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="full-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                                <input type="text" id="full-name" value="Dr. Eleanor Vance" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-powder-blue focus:border-powder-blue sm:text-sm">
+                            </div>
+                            <div>
+                                <label for="credentials" class="block text-sm font-medium text-gray-700">Credentials</label>
+                                <input type="text" id="credentials" value="PsyD, LMFT" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-powder-blue focus:border-powder-blue sm:text-sm">
+                            </div>
+                            <div>
+                                <label for="bio" class="block text-sm font-medium text-gray-700">Professional Bio</label>
+                                <textarea id="bio" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-powder-blue focus:border-powder-blue sm:text-sm">Specializing in cognitive-behavioral therapy (CBT) for anxiety disorders and stress management. My approach is collaborative, evidence-based, and tailored to your unique needs.</textarea>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-5 border-t border-gray-200 flex justify-end">
+                            <button type="button" class="bg-delft-blue text-white font-bold py-2 px-6 rounded-lg hover:bg-opacity-90 transition-colors">Save Changes</button>
+                        </div>
+                    </div>
+
+                    <!-- Contact & Location Card -->
+                    <div id="contact" class="bg-white p-6 rounded-lg shadow">
+                         <h3 class="font-oxygen text-xl font-bold mb-6">Contact & Location</h3>
+                         <div class="space-y-6">
+                             <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Contact Email</label>
+                                <input type="email" id="email" value="e.vance@clinic.com" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-powder-blue focus:border-powder-blue sm:text-sm">
+                            </div>
+                             <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Contact Phone</label>
+                                <input type="tel" id="phone" value="(555) 123-4567" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-powder-blue focus:border-powder-blue sm:text-sm">
+                            </div>
+                             <div>
+                                <label for="address" class="block text-sm font-medium text-gray-700">Studio Address</label>
+                                <input type="text" id="address" value="123 Wellness Lane, Suite 100, Mindful City, ST 12345" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-powder-blue focus:border-powder-blue sm:text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Opening Hours</label>
+                                <div class="mt-2 space-y-2 text-sm text-gray-800">
+                                    <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
+                                    <p><strong>Saturday - Sunday:</strong> Closed</p>
+                                </div>
+                            </div>
+                         </div>
+                         <div class="mt-8 pt-5 border-t border-gray-200 flex justify-end">
+                            <button type="button" class="bg-delft-blue text-white font-bold py-2 px-6 rounded-lg hover:bg-opacity-90 transition-colors">Save Changes</button>
+                        </div>
+                    </div>
+
+                    <!-- Preferences Card -->
+                    <div id="preferences" class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="font-oxygen text-xl font-bold mb-6">Preferences</h3>
+                        <div>
+                            <label class="text-base font-medium text-gray-900">Terminology</label>
+                            <p class="text-sm leading-5 text-gray-500">How would you like to refer to the people you work with?</p>
+                            <fieldset class="mt-4">
+                                <legend class="sr-only">Terminology selection</legend>
+                                <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                                    <div class="flex items-center">
+                                        <input id="patient" name="terminology" type="radio" checked class="focus:ring-powder-blue h-4 w-4 text-delft-blue border-gray-300">
+                                        <label for="patient" class="ml-3 block text-sm font-medium text-gray-700">Patients</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="client" name="terminology" type="radio" class="focus:ring-powder-blue h-4 w-4 text-delft-blue border-gray-300">
+                                        <label for="client" class="ml-3 block text-sm font-medium text-gray-700">Clients</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <!-- Integrations Card -->
+                    <div id="integrations" class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="font-oxygen text-xl font-bold mb-6">Calendar Integrations</h3>
+                        <ul class="divide-y divide-gray-200">
+                            <!-- Google Calendar -->
+                            <li class="py-4 flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <img class="w-8 h-8" src="https://www.google.com/images/icons/product/calendar-32.png" alt="Google Calendar logo">
+                                    <div>
+                                        <p class="font-medium">Google Calendar</p>
+                                        <p class="text-sm text-gray-500">Not connected</p>
+                                    </div>
+                                </div>
+                                <button type="button" class="bg-white border border-gray-300 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">Connect</button>
+                            </li>
+                            <!-- Outlook Calendar -->
+                            <li class="py-4 flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.25 7.75V5.25C2.25 4.42157 2.92157 3.75 3.75 3.75H8.25V19.5H3.75C2.92157 19.5 2.25 18.8284 2.25 18V16.25M2.25 12H7.5M9.75 3.75H20.25C21.0784 3.75 21.75 4.42157 21.75 5.25V18.75C21.75 19.5784 21.0784 20.25 20.25 20.25H9.75V3.75Z" stroke="#0078D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    <div>
+                                        <p class="font-medium">Outlook Calendar</p>
+                                        <p class="text-sm text-green-600">Connected</p>
+                                    </div>
+                                </div>
+                                <button type="button" class="bg-white border border-red-300 text-sm font-semibold text-red-600 px-4 py-2 rounded-lg hover:bg-red-50 transition-colors">Disconnect</button>
+                            </li>
+                            <!-- Apple Calendar -->
+                            <li class="py-4 flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <svg class="w-8 h-8 text-gray-800" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19.167 17.75C19.167 17.75 19.792 16.125 19.792 14.5C19.792 12.875 19.042 11.5 17.792 11.5C16.542 11.5 15.708 12.375 15.083 12.375C14.458 12.375 13.792 11.5 12.708 11.5C11.208 11.5 9.79198 12.875 9.79198 15.125C9.79198 17.375 11.042 21.25 12.708 21.25C13.792 21.25 14.542 20.375 15.167 20.375C15.792 20.375 16.458 21.25 17.708 21.25C19.375 21.25 20.292 18.875 20.292 18.875C20.292 18.875 20.292 17.75 19.167 17.75Z M14.542 8.375C15.167 7.625 15.625 6.625 15.542 5.625C15.542 5.625 14.792 5.75 13.958 6.375C13.958 6.375 13.333 7.125 13.042 8C13.042 8 13.792 8.25 14.542 8.375Z"></path></svg>
+                                    <div>
+                                        <p class="font-medium">Apple Calendar</p>
+                                        <p class="text-sm text-gray-500">Not connected</p>
+                                    </div>
+                                </div>
+                                <button type="button" class="bg-white border border-gray-300 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">Connect</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- We will add JavaScript later to handle view switching -->
+    <!-- <script src="settings.js"></script> -->
+
+</body>
+</html>

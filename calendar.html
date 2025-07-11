@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Calendar - MEMoPAD Clinician Portal</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Oxygen (for headings) and Inter (for UI text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Configuration for Tailwind CSS -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'oxygen': ['Oxygen', 'sans-serif'],
+              'inter': ['Inter', 'sans-serif'],
+            },
+            colors: {
+              // Our defined Design System colors
+              'eggshell': '#F0EBD8',      // Primary Background
+              'powder-blue': '#A4B0F5',   // Accent Color
+              'delft-blue': '#414066',    // Primary Text & Action Color
+              // Additional colors for calendar events
+              'event-teal': '#2DD4BF',
+              'event-orange': '#F97316',
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-eggshell font-inter text-delft-blue">
+
+    <div class="flex h-screen bg-eggshell">
+        <!-- Static Sidebar -->
+        <aside class="w-64 flex-shrink-0 bg-white flex flex-col shadow-lg">
+            <div class="h-20 flex items-center justify-center border-b border-gray-200">
+                <h1 class="font-oxygen text-2xl font-bold text-delft-blue"> <a href="https://memopad.luigiandreamoretti.com/">MEMoPAD</a></h1>
+            </div>
+            <nav class="flex-1 px-4 py-6 space-y-2">
+                <!-- Inactive Dashboard Link -->
+                <a href="dashboard.html" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    Dashboard
+                </a>
+                <!-- Active Global Calendar Link -->
+                <a href="#" class="flex items-center px-4 py-2 text-delft-blue bg-powder-blue bg-opacity-20 rounded-lg font-bold" aria-current="page">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Global Calendar
+                </a>
+                <!-- Inactive Settings Link -->
+                <a href="settings.html" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Settings
+                </a>
+            </nav>
+            <div class="p-4 border-t border-gray-200">
+                <a href="https://memopad-demo.luigiandreamoretti.com/" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H3"></path></svg>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-8 flex flex-col">
+            <!-- Calendar Header -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-4">
+                    <h2 class="font-oxygen text-3xl font-bold">July 2025</h2>
+                    <div class="flex items-center gap-2">
+                        <button class="p-2 rounded-full hover:bg-gray-200 transition-colors" aria-label="Previous week">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+                        <button class="p-2 rounded-full hover:bg-gray-200 transition-colors" aria-label="Next week">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="px-4 py-2 text-sm font-semibold bg-white rounded-lg shadow-sm">Month</button>
+                    <button class="px-4 py-2 text-sm font-semibold bg-delft-blue text-white rounded-lg shadow-sm">Week</button>
+                    <button class="px-4 py-2 text-sm font-semibold bg-white rounded-lg shadow-sm">Day</button>
+                </div>
+            </div>
+
+            <!-- Weekly Calendar Grid -->
+            <div class="flex-1 grid grid-cols-[auto,1fr,1fr,1fr,1fr,1fr] grid-rows-[auto,repeat(10,1fr)] gap-px bg-gray-200 rounded-lg shadow-lg overflow-hidden">
+                <!-- Time Column -->
+                <div class="bg-white"></div>
+                <!-- Day Headers -->
+                <div class="bg-white p-3 text-center font-bold">Mon 7</div>
+                <div class="bg-white p-3 text-center font-bold">Tue 8</div>
+                <div class="bg-white p-3 text-center font-bold">Wed 9</div>
+                <div class="bg-white p-3 text-center font-bold">Thu 10</div>
+                <div class="bg-white p-3 text-center font-bold">Fri 11</div>
+                
+                <!-- Time Slots and Events -->
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">9:00 AM</div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                        <strong>Jane Doe</strong><br>Therapy Session
+                    </div>
+                </div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-event-teal bg-opacity-80 text-white p-2 rounded-lg text-xs leading-tight">
+                        <strong>John Smith</strong><br>Check-in Call
+                    </div>
+                </div>
+                <div class="bg-white relative"></div>
+
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">10:00 AM</div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                        <strong>Emily White</strong><br>Therapy Session
+                    </div>
+                </div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                        <strong>Jane Doe</strong><br>Therapy Session
+                    </div>
+                </div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-event-teal bg-opacity-80 text-white p-2 rounded-lg text-xs leading-tight">
+                        <strong>New Patient</strong><br>Initial Consultation
+                    </div>
+                </div>
+
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">11:00 AM</div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                        <strong>Emily White</strong><br>Therapy Session
+                    </div>
+                </div>
+                <div class="bg-white relative"></div>
+
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">12:00 PM</div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                        <strong>Lunch Break</strong>
+                    </div>
+                </div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                        <strong>Lunch Break</strong>
+                    </div>
+                </div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                        <strong>Lunch Break</strong>
+                    </div>
+                </div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                        <strong>Lunch Break</strong>
+                    </div>
+                </div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-event-orange bg-opacity-70 text-white p-2 rounded-lg text-xs leading-tight">
+                        <strong>Lunch Break</strong>
+                    </div>
+                </div>
+
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">1:00 PM</div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">2:00 PM</div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                        <strong>John Smith</strong><br>Therapy Session
+                    </div>
+                </div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">3:00 PM</div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-powder-blue bg-opacity-80 text-delft-blue p-2 rounded-lg text-xs leading-tight">
+                        <strong>Jane Doe</strong><br>Therapy Session
+                    </div>
+                </div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">4:00 PM</div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">5:00 PM</div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-gray-300 text-gray-700 p-2 rounded-lg text-xs leading-tight">
+                        <strong>Admin Block</strong><br>Notes & Planning
+                    </div>
+                </div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative">
+                    <div class="absolute inset-1 bg-gray-300 text-gray-700 p-2 rounded-lg text-xs leading-tight">
+                        <strong>Admin Block</strong><br>Notes & Planning
+                    </div>
+                </div>
+                <div class="bg-white relative"></div>
+
+                <div class="row-span-1 text-right pr-2 text-sm text-gray-500 bg-white relative -top-3">6:00 PM</div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+                <div class="bg-white relative"></div>
+
+            </div>
+        </main>
+    </div>
+    
+    <!-- We will add JavaScript later to handle view switching -->
+    <!-- <script src="calendar.js"></script> -->
+
+</body>
+</html>
