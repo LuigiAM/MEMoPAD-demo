@@ -1,0 +1,86 @@
+# MEMoPAD clinician dashboard demo: robots.txt
+# Last reviewed: 19 October 2026
+# Keep in sync with public/robots.txt in the PhD_project_website repository.
+
+# As a condition of accessing this website, you agree to abide by the following
+# content signals:
+
+# (a)  If a Content-Signal = yes, you may collect content for the corresponding
+#      use.
+# (b)  If a Content-Signal = no, you may not collect content for the
+#      corresponding use.
+# (c)  If the website operator does not include a Content-Signal for a
+#      corresponding use, the website operator neither grants nor restricts
+#      permission via Content-Signal with respect to the corresponding use.
+
+# The content signals and their meanings are:
+
+# search:   building a search index and providing search results (e.g., returning
+#           hyperlinks and short excerpts from your website's contents). Search does not
+#           include providing AI-generated search summaries.
+# ai-input: inputting content into one or more AI models (e.g., retrieval
+#           augmented generation, grounding, or other real-time taking of content for
+#           generative AI search answers).
+# ai-train: training or fine-tuning AI models.
+
+# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF
+# RIGHTS UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT
+# AND RELATED RIGHTS IN THE DIGITAL SINGLE MARKET.
+
+# Reservation of rights: Luigi Andrea Moretti expressly reserves the rights to
+# text and data mining of this website's content, including its use to train or
+# fine-tune AI models, under Article 4(3) of Directive (EU) 2019/790 (in Italy,
+# articles 70-quater and 70-septies of Law 633/1941). Providers of
+# general-purpose AI models must respect this reservation under Article 53(1)(c)
+# of the EU AI Act (Regulation (EU) 2024/1689).
+# To license content for text and data mining or AI training: hello@luigimoretti.com
+
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Content-Usage: train-ai=n
+Allow: /
+
+# AI training and dataset crawlers
+User-agent: AI2Bot
+User-agent: Ai2Bot-Dolma
+User-agent: aiHitBot
+User-agent: Amazonbot
+User-agent: anthropic-ai
+User-agent: Applebot-Extended
+User-agent: Bytespider
+User-agent: CCBot
+User-agent: Claude-Web
+User-agent: ClaudeBot
+User-agent: cohere-training-data-crawler
+User-agent: Cotoyogi
+User-agent: DeepSeekBot
+User-agent: Diffbot
+User-agent: ERNIEBot
+User-agent: FacebookBot
+User-agent: Factset_spyderbot
+User-agent: FriendlyCrawler
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: Hunyuan
+User-agent: ICC-Crawler
+User-agent: ImagesiftBot
+User-agent: img2dataset
+User-agent: ISSCyberRiskCrawler
+User-agent: KimiBot
+User-agent: laion-huggingface-processor
+User-agent: LAIONDownloader
+User-agent: meta-externalagent
+User-agent: MistralAI-Training
+User-agent: MoonshotBot
+User-agent: omgili
+User-agent: omgilibot
+User-agent: PanguBot
+User-agent: QwenBot
+User-agent: SBIntuitionsBot
+User-agent: TikTokSpider
+User-agent: Timpibot
+User-agent: VelenPublicWebCrawler
+User-agent: Webzio-Extended
+User-agent: YandexAdditional
+User-agent: YandexAdditionalBot
+Disallow: /
